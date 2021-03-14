@@ -302,7 +302,7 @@ open class CalendarView : RecyclerView {
             }
 
             // +0.5 => round to the nearest pixel
-            val size = (((widthSize - (monthPaddingStart + monthPaddingEnd)) / 7f) + 0.5).toInt()
+            val size = (((widthSize - (monthPaddingStart + monthPaddingEnd)) / 7f) + 1).toInt()
 
             val height = if (autoSizeHeight == SQUARE) size else autoSizeHeight
             val computedSize = daySize.copy(width = size, height = height)
@@ -687,6 +687,20 @@ open class CalendarView : RecyclerView {
         this.endMonth = endMonth
         this.firstDayOfWeek = firstDayOfWeek
         finishSetup(generateMonthConfig(Job()))
+    }
+
+    fun setup(monthConfig: MonthConfig) {
+        configJob?.cancel()
+        internalConfigUpdate = true
+        this.startMonth = monthConfig.startMonth
+        this.endMonth = monthConfig.endMonth
+        this.firstDayOfWeek = monthConfig.firstDayOfWeek
+        outDateStyle = monthConfig.outDateStyle
+        inDateStyle = monthConfig.inDateStyle
+        maxRowCount = monthConfig.maxRowCount
+        hasBoundaries = monthConfig.hasBoundaries
+        internalConfigUpdate = false
+        finishSetup(monthConfig)
     }
 
     /**
