@@ -249,16 +249,20 @@ class CalendarViewTests {
         sleep(2000)
 
         // First visible day is the first day in the week row it belongs. (top-left)
-        val firstVisibleMonth = calendarView.findFirstVisibleMonth()!!
-        val firstVisibleDay = calendarView.findFirstVisibleDay()!!
+        val firstVisibleMonth =
+            checkNotNull(calendarView.findFirstVisibleMonth()) { "findFirstVisibleMonth" }
+        val firstVisibleDay =
+            checkNotNull(calendarView.findFirstVisibleDay()) { "findFirstVisibleDay" }
         val weekOfFirstDay = firstVisibleMonth.weekDays.first { weekDays ->
             weekDays.any { day -> day == firstVisibleDay }
         }
         assertEquals(firstVisibleDay, weekOfFirstDay.first())
 
         // Last visible day is the last day in the week row it belongs. (bottom-right)
-        val lastVisibleMonth = calendarView.findLastVisibleMonth()!!
-        val lastVisibleDay = calendarView.findLastVisibleDay()!!
+        val lastVisibleMonth =
+            checkNotNull(calendarView.findLastVisibleMonth()) { "findLastVisibleMonth" }
+        val lastVisibleDay =
+            checkNotNull(calendarView.findLastVisibleDay()) { "findLastVisibleDay" }
         val weekOfLastDate = lastVisibleMonth.weekDays.first { weekDays ->
             weekDays.any { day -> day == lastVisibleDay }
         }
@@ -279,15 +283,19 @@ class CalendarViewTests {
         sleep(2000)
 
         // First visible day is the first day in the month column(day of week) where it belongs. (top-left)
-        val firstVisibleMonth = calendarView.findFirstVisibleMonth()!!
-        val firstVisibleDay = calendarView.findFirstVisibleDay()!!
+        val firstVisibleMonth =
+            checkNotNull(calendarView.findFirstVisibleMonth()) { "findFirstVisibleMonth" }
+        val firstVisibleDay =
+            checkNotNull(calendarView.findFirstVisibleDay()) { "findFirstVisibleDay" }
         val daysWIthSameDayOfWeekAsFirstDay = firstVisibleMonth.weekDays.flatten()
             .filter { it.date.dayOfWeek == firstVisibleDay.date.dayOfWeek }
         assertEquals(firstVisibleDay, daysWIthSameDayOfWeekAsFirstDay.first())
 
         // Last visible day is the last day in the month column(day of week) where it belongs. (bottom-right)
-        val lastVisibleMonth = calendarView.findLastVisibleMonth()!!
-        val lastVisibleDay = calendarView.findLastVisibleDay()!!
+        val lastVisibleMonth =
+            checkNotNull(calendarView.findLastVisibleMonth()) { "findLastVisibleMonth" }
+        val lastVisibleDay =
+            checkNotNull(calendarView.findLastVisibleDay()) { "findLastVisibleDay" }
         val daysWIthSameDayOfWeekAsLastDay = lastVisibleMonth.weekDays.flatten()
             .filter { it.date.dayOfWeek == lastVisibleDay.date.dayOfWeek }
         assertEquals(lastVisibleDay, daysWIthSameDayOfWeekAsLastDay.last())
